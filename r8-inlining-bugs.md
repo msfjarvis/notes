@@ -15,3 +15,5 @@ Speciment 2 from wireguard-android
 ```
 R8: FORCE inlining on non-inlinable: void androidx.fragment.app.FragmentManagerImpl.constructor$androidx$fragment$app$FragmentManager()
 ```
+
+This can be fixed by turning off R8's full mode by setting `android.enableR8.fullMode=false` in `gradle.properties`.
