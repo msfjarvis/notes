@@ -2,6 +2,8 @@
 date: 2020-10-24T23:46
 ---
 
+# Potential bugs with R8's full mode
+
 It appears that some code in the latest revision of Google's R8 optimizer is causing it to try and inline things it shouldn't, and thus fail.
 
 Exhibit 1 from [compose-lobsters](https://msfjarvis.dev/g/compose-lobsters)
