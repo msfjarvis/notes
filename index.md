@@ -10,3 +10,4 @@ Indexed by topic:
 
 - [[[android]]]
 - [[[github]]]
+- [[[rust]]]
