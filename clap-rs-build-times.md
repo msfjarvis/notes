@@ -2,12 +2,22 @@
 date: 2020-10-27T11:53
 ---
 
-# clap-rs is slow to build
+# derive-based argument parsers slow down build
 
 [clap-rs](https://github.com/clap-rs/clap) is an excellent argument parser but build times for it are absolutely abysmal. Here's stats on [healthchecks-rs](https://msfjarvis.dev/g/healthchecks-rs)
 
-![Overall build time for healthchecks-rs](https://pbs.twimg.com/media/ElUOhPgVcAENsLO?format=png&name=900x900)
+```
+Benchmark #1: cargo build --release
+  Time (mean ± σ):     37.308 s ±  0.403 s    [User: 228.193 s, System: 10.661 s]
+  Range (min … max):   36.830 s … 38.054 s    10 runs
+```
 
-![Clap's contribution to the build time](https://pbs.twimg.com/media/ElUOrjjUcAAXC_T?format=png&name=medium)
+So I tried to switch to [argh](https://github.com/google/argh), and got these build times.
 
-As you can see, clap-rs takes up around **HALF** of the total build time for the binaries. I will be attempting to migrate to [argh](https://github.com/google/argh) in an effort to combat this build overhead and will update this page when I have some numbers.
+```
+Benchmark #1: cargo build --release
+  Time (mean ± σ):     38.430 s ±  0.281 s    [User: 235.046 s, System: 11.600 s]
+  Range (min … max):   37.981 s … 38.819 s    10 runs
+```
+
+As you can see, it's just as slow if not ever so slightly slower :(
