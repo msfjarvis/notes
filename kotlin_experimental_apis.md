@@ -1,8 +1,35 @@
 ---
+: Kotlin
 date: 2020-11-08T04:24
 ---
 
-# kotlin_experimental_apis
+# Understanding Kotlin's experimental APIs support (WIP)
 
-Write your Markdown content here. Read [neuron documentation](https://neuron.zettel.page/2011404.html) for syntax help.
+Kotlin allows developers to mark APIs as experimental, requiring opting into being able to use them. The semantics around this were changed in Kotlin 1.3.70 to rename the compiler option and annotations for the purpose, but we'll be sticking with how things are in Kotlin 1.4.10.
 
+To begin marking APIs as experimental, you'll first need to create an annotation. Here's how you create a fictional experimental API marker called `ExperimentalResultApi`
+
+```kotlin
+@RequiresOptIn(message = "This API is experimental. It may be changed in the future without notice.")
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+annotation class ExperimentalResultApi
+```
+
+To mark a specific API as experimental, simply annotate it with this annotation. As you can check in the value of `@Target` above, this annotation can be applied to either classes or functions. Let's try that.
+
+```kotlin
+@ExperimentalResultApi
+public class FancyResult(value: String) {
+  fun doSomething() { 
+    /** method body is irrelevant for this **/
+  }
+}
+
+public object ResultUtils {
+  @ExperimentalResultApi
+  fun convertToFancyResult(value: String): FancyResult {
+    return FancyResult(value)
+  }
+}
+```
