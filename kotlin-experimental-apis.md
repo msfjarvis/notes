@@ -47,7 +47,7 @@ fun main() {
 
 Both `r1` and `r2` are generated using experimental APIs, but only the declaration of `r2` will cause the compiler to emit a warning/an error.
 
-![The call to FancyResult results in a compiler error](/static/experimental-api-no-opt-in.webp)
+![The call to FancyResult results in a compiler error](/notes/static/experimental-api-no-opt-in.webp)
 
 The secret sauce to it is how we annotated the `ResultUtils.convertToFancyResult` method. Using the `OptIn` annotation as opposed to directly adding the `ExperimentalResultApi` annotation causes the compiler to **not propagate** the experimental nature of the API to callers.
 
